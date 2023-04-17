@@ -29,17 +29,12 @@
         private void InitializeComponent()
         {
             components=new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             ground=new Panel();
             lblScore=new Label();
             pipeBottom=new PictureBox();
             pipeTop=new PictureBox();
             bird=new PictureBox();
             gameTimer=new System.Windows.Forms.Timer(components);
-            angelTimer=new System.Windows.Forms.Timer(components);
-            GetReady=new Panel();
-            GameOver=new Panel();
-            BestScore=new Panel();
             ground.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pipeBottom).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pipeTop).BeginInit();
@@ -92,7 +87,6 @@
             // bird
             // 
             bird.BackColor=Color.Transparent;
-            bird.Enabled=false;
             bird.Image=Properties.Resources.grumpy_yellow;
             bird.Location=new Point(65, 257);
             bird.Name="bird";
@@ -103,40 +97,9 @@
             // 
             // gameTimer
             // 
+            gameTimer.Enabled=true;
             gameTimer.Interval=50;
             gameTimer.Tick+=Update;
-            // 
-            // angelTimer
-            // 
-            angelTimer.Interval=50;
-            angelTimer.Tick+=angelTimer_Tick;
-            // 
-            // GetReady
-            // 
-            GetReady.BackgroundImage=Properties.Resources.GetReady;
-            GetReady.BackgroundImageLayout=ImageLayout.Zoom;
-            GetReady.Location=new Point(43, 226);
-            GetReady.Name="GetReady";
-            GetReady.Size=new Size(408, 167);
-            GetReady.TabIndex=4;
-            // 
-            // GameOver
-            // 
-            GameOver.BackgroundImage=Properties.Resources.GameOver;
-            GameOver.BackgroundImageLayout=ImageLayout.Zoom;
-            GameOver.Location=new Point(46, 226);
-            GameOver.Name="GameOver";
-            GameOver.Size=new Size(408, 167);
-            GameOver.TabIndex=5;
-            // 
-            // BestScore
-            // 
-            BestScore.BackgroundImage=Properties.Resources.BestScore;
-            BestScore.BackgroundImageLayout=ImageLayout.Zoom;
-            BestScore.Location=new Point(44, 225);
-            BestScore.Name="BestScore";
-            BestScore.Size=new Size(408, 167);
-            BestScore.TabIndex=5;
             // 
             // frmMain
             // 
@@ -144,21 +107,15 @@
             AutoScaleMode=AutoScaleMode.Font;
             BackColor=Color.Aqua;
             ClientSize=new Size(553, 685);
-            Controls.Add(BestScore);
-            Controls.Add(GetReady);
             Controls.Add(bird);
-            Controls.Add(GameOver);
             Controls.Add(ground);
             Controls.Add(pipeBottom);
             Controls.Add(pipeTop);
             Font=new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            Icon=(Icon)resources.GetObject("$this.Icon");
             KeyPreview=true;
             Margin=new Padding(5, 6, 5, 6);
             Name="frmMain";
             Text="Flappy Bird";
-            Shown+=frmMain_Shown;
-            Paint+=frmMain_Paint;
             KeyDown+=keyDown;
             ground.ResumeLayout(false);
             ground.PerformLayout();
@@ -176,9 +133,5 @@
         private PictureBox pipeTop;
         private PictureBox bird;
         private System.Windows.Forms.Timer gameTimer;
-        private System.Windows.Forms.Timer angelTimer;
-        private Panel GetReady;
-        private Panel GameOver;
-        private Panel BestScore;
     }
 }

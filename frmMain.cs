@@ -8,49 +8,12 @@ namespace WinFlappyBird
         int gravity = 1;
         int birdSpeed = 0;
         int score = 0;
-        bool canStart = true;
 
         static readonly Random random = new Random();
 
         public frmMain()
         {
             InitializeComponent();
-        }
-
-        private void Reset()
-        {
-
-            gameTimer.Enabled = false;
-            angelTimer.Enabled = false;
-
-            bird.Left = 65;
-            bird.Top = 257;
-            bird.Image=Resources.grumpy_yellow;
-            bird.Enabled=false;
-            pipeSpeed = 15;
-            gravity = 1;
-            birdSpeed = 0;
-            score = 0;
-
-            pipeTop.Left = 332;
-            pipeBottom.Left = 279;
-            lblScore.Text = "Score: 0";
-
-            GameOver.Visible = false;
-            GetReady.Visible = true;
-            BestScore.Visible = false;
-            canStart = true;
-
-        }
-
-        private void Start()
-        {
-            gameTimer.Enabled=true;
-            bird.Enabled = true;
-            canStart = false;
-            GetReady.Visible=false;
-            GameOver.Visible=false;
-            BestScore.Visible=false;
         }
 
         private void Update(object sender, EventArgs e)
@@ -69,34 +32,14 @@ namespace WinFlappyBird
 
 
             //Controllo collisioni 
-            Rectangle collision = bird.Bounds;
-            collision.Inflate(-20, -15);
-
-            if (collision.IntersectsWith(pipeBottom.Bounds) ||
-                collision.IntersectsWith(pipeTop.Bounds) ||
-                collision.IntersectsWith(ground.Bounds))
+            if (bird.Bounds.IntersectsWith(pipeBottom.Bounds) ||
+                bird.Bounds.IntersectsWith(pipeTop.Bounds) ||
+                bird.Bounds.IntersectsWith(ground.Bounds))
             {
 
                 //GameOver
                 gameTimer.Enabled = false;
-
-                //Timer per animazione angioletto
-                bird.Image = Resources.angel;
-                angelTimer.Enabled = true;
-
-                //Salvo il punteggio
-                if (score > Settings.Default.best_score)
-                {
-                    //Best Score!
-                    Settings.Default.best_score = score;
-                    Settings.Default.Save();
-                    BestScore.Visible = true;
-                }
-                else
-                {
-                    GameOver.Visible = true;
-                }
-
+                bird.Enabled = false;
             }
 
             //Aumento punteggio quando bird supera con successo il tubo
@@ -115,59 +58,13 @@ namespace WinFlappyBird
 
         private void keyDown(object sender, KeyEventArgs e)
         {
-            if (gameTimer.Enabled == false)
+            //Sbatto le ali, bird sale verso l'alto
+            if (e.KeyCode== Keys.Space)
             {
-                if (e.KeyCode== Keys.Space)
-                {
-                    if (canStart)
-                    {
-                        Start();
-                    }
-                    else
-                    {
-                        Reset();
-                    }
-                }
-            }
-            else
-            {
-                //Sbatto le ali, bird sale verso l'alto
-                if (e.KeyCode== Keys.Space)
-                {
-                    birdSpeed = -10;
-                }
+                birdSpeed = -10;
             }
 
         }
 
-        private void angelTimer_Tick(object sender, EventArgs e)
-        {
-            if (bird.Top + bird.Height <= 0)
-            {
-                angelTimer.Enabled = false;
-                if (score == Settings.Default.best_score)
-                {
-                    GameOver.Visible = false;
-                    BestScore.Visible = true;
-                }
-            }
-
-            bird.Top -= 10;
-            bird.Left += 10;
-
-        }
-
-        private void frmMain_Shown(object sender, EventArgs e)
-        {
-            Reset();
-        }
-
-        private void frmMain_Paint(object sender, PaintEventArgs e)
-        {
-            //visualizzo il rettangolo di collisione
-            //Rectangle collision = bird.Bounds;
-            //collision.Inflate(-20, -15);
-            //e.Graphics.DrawRectangle(Pens.Red, collision);
-        }
     }
 }

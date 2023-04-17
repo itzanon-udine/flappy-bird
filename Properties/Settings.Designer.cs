@@ -22,17 +22,5 @@ namespace WinFlappyBird.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int best_score {
-            get {
-                return ((int)(this["best_score"]));
-            }
-            set {
-                this["best_score"] = value;
-            }
-        }
     }
 }
