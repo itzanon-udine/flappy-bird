@@ -1,3 +1,4 @@
+using System.Security.Permissions;
 using WinFlappyBird.Properties;
 
 namespace WinFlappyBird
@@ -9,11 +10,16 @@ namespace WinFlappyBird
         int birdSpeed = 0;
         int score = 0;
 
+        static System.Media.SoundPlayer flap = new System.Media.SoundPlayer(Resources.flap2);
+        static System.Media.SoundPlayer sdeng = new System.Media.SoundPlayer(Resources.sdeng);
+
         static readonly Random random = new Random();
 
         public frmMain()
         {
             InitializeComponent();
+            flap.LoadAsync();
+            sdeng.LoadAsync();
         }
 
         private void Update(object sender, EventArgs e)
@@ -38,6 +44,7 @@ namespace WinFlappyBird
             {
 
                 //GameOver
+                sdeng.Play();
                 gameTimer.Enabled = false;
                 bird.Enabled = false;
             }
@@ -58,10 +65,14 @@ namespace WinFlappyBird
 
         private void keyDown(object sender, KeyEventArgs e)
         {
-            //Sbatto le ali, bird sale verso l'alto
-            if (e.KeyCode== Keys.Space)
-            {
-                birdSpeed = -10;
+            if (gameTimer.Enabled)
+            {         
+                //Sbatto le ali, bird sale verso l'alto
+                if (e.KeyCode== Keys.Space)
+                {
+                    flap.Play();                
+                    birdSpeed = -10;
+                }
             }
 
         }

@@ -81,6 +81,33 @@ namespace WinFlappyBird.Properties {
         }
         
         /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.IO.UnmanagedMemoryStream simile a System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream dong {
+            get {
+                return ResourceManager.GetStream("dong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.IO.UnmanagedMemoryStream simile a System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream flap {
+            get {
+                return ResourceManager.GetStream("flap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.IO.UnmanagedMemoryStream simile a System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream flap2 {
+            get {
+                return ResourceManager.GetStream("flap2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap GameOver {
@@ -137,6 +164,15 @@ namespace WinFlappyBird.Properties {
             get {
                 object obj = ResourceManager.GetObject("pipedown", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.IO.UnmanagedMemoryStream simile a System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream sdeng {
+            get {
+                return ResourceManager.GetStream("sdeng", resourceCulture);
             }
         }
     }
